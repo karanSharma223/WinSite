@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WinsiteModelStoreContainer" CdmEntityContainer="WinsiteEntities">
+    <EntitySetMapping Name="Hackathons">
+      <EntityTypeMapping TypeName="WinsiteModel.Hackathon">
+        <MappingFragment StoreEntitySet="Hackathons">
+          <ScalarProperty Name="HackathonId" ColumnName="HackathonId" />
+          <ScalarProperty Name="HackathonName" ColumnName="HackathonName" />
+          <ScalarProperty Name="Teamsize" ColumnName="Teamsize" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="FirstPlace" ColumnName="FirstPlace" />
+          <ScalarProperty Name="SecondPlace" ColumnName="SecondPlace" />
+          <ScalarProperty Name="ThirdPlace" ColumnName="ThirdPlace" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ideas">
+      <EntityTypeMapping TypeName="WinsiteModel.Idea">
+        <MappingFragment StoreEntitySet="Ideas">
+          <ScalarProperty Name="IdeaId" ColumnName="IdeaId" />
+          <ScalarProperty Name="IdeaTitle" ColumnName="IdeaTitle" />
+          <ScalarProperty Name="IdeaDescription" ColumnName="IdeaDescription" />
+          <ScalarProperty Name="Likes" ColumnName="Likes" />
+          <ScalarProperty Name="TeamIdea" ColumnName="TeamIdea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="WinsiteModel.Team">
+        <MappingFragment StoreEntitySet="Teams">
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="LeaderId" ColumnName="LeaderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="WinsiteModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeamMembers">
+      <EntityTypeMapping TypeName="WinsiteModel.TeamMember">
+        <MappingFragment StoreEntitySet="TeamMembers">
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="Teammates" ColumnName="Teammates" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

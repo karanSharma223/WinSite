@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WinsiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Hackathon">
+    <Key>
+      <PropertyRef Name="HackathonId" />
+    </Key>
+    <Property Name="HackathonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HackathonName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Teamsize" Type="Int32" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="FirstPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SecondPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ThirdPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Team" Relationship="Self.FK__Hackathon__First__3D5E1FD2" FromRole="Hackathons" ToRole="Teams" />
+    <NavigationProperty Name="Team1" Relationship="Self.FK__Hackathon__Secon__3E52440B" FromRole="Hackathons" ToRole="Teams" />
+    <NavigationProperty Name="Team2" Relationship="Self.FK__Hackathon__Third__3F466844" FromRole="Hackathons" ToRole="Teams" />
+  </EntityType>
+  <EntityType Name="Idea">
+    <Key>
+      <PropertyRef Name="IdeaId" />
+    </Key>
+    <Property Name="IdeaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdeaTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdeaDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Likes" Type="Int32" />
+    <Property Name="TeamIdea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Team" Relationship="Self.FK__Ideas__TeamIdea__4222D4EF" FromRole="Ideas" ToRole="Teams" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="TeamName" />
+    </Key>
+    <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LeaderId" Type="Int32" />
+    <NavigationProperty Name="Hackathons" Relationship="Self.FK__Hackathon__First__3D5E1FD2" FromRole="Teams" ToRole="Hackathons" />
+    <NavigationProperty Name="Hackathons1" Relationship="Self.FK__Hackathon__Secon__3E52440B" FromRole="Teams" ToRole="Hackathons" />
+    <NavigationProperty Name="Hackathons2" Relationship="Self.FK__Hackathon__Third__3F466844" FromRole="Teams" ToRole="Hackathons" />
+    <NavigationProperty Name="Ideas" Relationship="Self.FK__Ideas__TeamIdea__4222D4EF" FromRole="Teams" ToRole="Ideas" />
+    <NavigationProperty Name="TeamMember" Relationship="Self.FK__TeamMembe__TeamN__440B1D61" FromRole="Teams" ToRole="TeamMembers" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Teams__LeaderId__3A81B327" FromRole="Teams" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IsAdmin" Type="Boolean" />
+    <NavigationProperty Name="Teams" Relationship="Self.FK__Teams__LeaderId__3A81B327" FromRole="Users" ToRole="Teams" />
+    <NavigationProperty Name="TeamMembers" Relationship="Self.FK__TeamMembe__Teamm__44FF419A" FromRole="Users" ToRole="TeamMembers" />
+  </EntityType>
+  <EntityType Name="TeamMember">
+    <Key>
+      <PropertyRef Name="TeamName" />
+    </Key>
+    <Property Name="TeamName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Teammates" Type="Int32" />
+    <NavigationProperty Name="Team" Relationship="Self.FK__TeamMembe__TeamN__440B1D61" FromRole="TeamMembers" ToRole="Teams" />
+    <NavigationProperty Name="User" Relationship="Self.FK__TeamMembe__Teamm__44FF419A" FromRole="TeamMembers" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK__Hackathon__First__3D5E1FD2">
+    <End Role="Teams" Type="Self.Team" Multiplicity="0..1" />
+    <End Role="Hackathons" Type="Self.Hackathon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="TeamName" />
+      </Principal>
+      <Dependent Role="Hackathons">
+        <PropertyRef Name="FirstPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Hackathon__Secon__3E52440B">
+    <End Role="Teams" Type="Self.Team" Multiplicity="0..1" />
+    <End Role="Hackathons" Type="Self.Hackathon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="TeamName" />
+      </Principal>
+      <Dependent Role="Hackathons">
+        <PropertyRef Name="SecondPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Hackathon__Third__3F466844">
+    <End Role="Teams" Type="Self.Team" Multiplicity="0..1" />
+    <End Role="Hackathons" Type="Self.Hackathon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="TeamName" />
+      </Principal>
+      <Dependent Role="Hackathons">
+        <PropertyRef Name="ThirdPlace" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ideas__TeamIdea__4222D4EF">
+    <End Role="Teams" Type="Self.Team" Multiplicity="0..1" />
+    <End Role="Ideas" Type="Self.Idea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="TeamName" />
+      </Principal>
+      <Dependent Role="Ideas">
+        <PropertyRef Name="TeamIdea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeamMembe__TeamN__440B1D61">
+    <End Role="Teams" Type="Self.Team" Multiplicity="1" />
+    <End Role="TeamMembers" Type="Self.TeamMember" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="TeamName" />
+      </Principal>
+      <Dependent Role="TeamMembers">
+        <PropertyRef Name="TeamName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teams__LeaderId__3A81B327">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Teams" Type="Self.Team" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Teams">
+        <PropertyRef Name="LeaderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TeamMembe__Teamm__44FF419A">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="TeamMembers" Type="Self.TeamMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TeamMembers">
+        <PropertyRef Name="Teammates" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="WinsiteEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Hackathons" EntityType="Self.Hackathon" />
+    <EntitySet Name="Ideas" EntityType="Self.Idea" />
+    <EntitySet Name="Teams" EntityType="Self.Team" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="TeamMembers" EntityType="Self.TeamMember" />
+    <AssociationSet Name="FK__Hackathon__First__3D5E1FD2" Association="Self.FK__Hackathon__First__3D5E1FD2">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="Hackathons" EntitySet="Hackathons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Hackathon__Secon__3E52440B" Association="Self.FK__Hackathon__Secon__3E52440B">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="Hackathons" EntitySet="Hackathons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Hackathon__Third__3F466844" Association="Self.FK__Hackathon__Third__3F466844">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="Hackathons" EntitySet="Hackathons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ideas__TeamIdea__4222D4EF" Association="Self.FK__Ideas__TeamIdea__4222D4EF">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="Ideas" EntitySet="Ideas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeamMembe__TeamN__440B1D61" Association="Self.FK__TeamMembe__TeamN__440B1D61">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="TeamMembers" EntitySet="TeamMembers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teams__LeaderId__3A81B327" Association="Self.FK__Teams__LeaderId__3A81B327">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Teams" EntitySet="Teams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TeamMembe__Teamm__44FF419A" Association="Self.FK__TeamMembe__Teamm__44FF419A">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TeamMembers" EntitySet="TeamMembers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
