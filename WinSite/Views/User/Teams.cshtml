@@ -1,0 +1,110 @@
+﻿@model List<WinSite.ViewModels.TeamModelView>
+
+@{
+    ViewBag.Title = "Teams";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Teams</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/umd/popper.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .card-title {
+            color: #088BCF;
+        }
+
+        .text-center {
+            color: #088BCF;
+            justify-items: center;
+        }
+
+        .dark-mode {
+            background-color:;
+        }
+
+        .row {
+            padding-left: 100px;
+        }
+
+        .team-heading {
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .btn-view-members {
+            background-color: #31AB46;
+            color: white;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body class="light-mode">
+
+    <h1 class="mt-5" style="width: 60rem; margin-left: 400px; color: #1E2556 ">Teams Enrolled </h1>
+
+    @foreach (var item in Model)
+    {
+        <div class="container mt-5" style="width: 60rem; margin-left: 400px">
+            <div class="card">
+                <div class="card-header team-heading" data-toggle="collapse" data-target="#teamMembers-@item.TeamName" aria-expanded="true">
+                    <h5 class="mb-0">@item.TeamName</h5>
+                    <button class="btn btn-view-members" type="button" data-toggle="collapse" data-target="#teamMembers-@item.TeamName" aria-expanded="true" aria-controls="teamMembers-@item.TeamName">
+                        View Team Members
+                    </button>
+                </div>
+                <div id="teamMembers-@item.TeamName" class="collapse">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Role</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < item.Members.Count(); i++)
+                                {
+                                    <tr>
+                                        <td>@item.Members[i]</td>
+                                        @{
+                                            if (@item.Members[i] == item.LeaderName)
+                                            {
+                                                <td>Leader</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Member</td>
+                                            }
+                                        }
+                                        <td>@item.AllEmails[i]</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</body>
+</html>
+
+
+
+

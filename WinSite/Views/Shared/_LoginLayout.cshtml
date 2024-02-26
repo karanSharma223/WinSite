@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/umd/popper.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/fontawesome/all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .navbar-custom {
+            background-color: #088BCF;
+        }
+
+        .btn-custom {
+            background-color: #31AB46;
+            color: white;
+            margin-right: 10px; /* Increase spacing here */
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #fff; /* Light background color */
+            color: #333; /* Dark text color */
+        }
+
+            /* Dark mode styles */
+            body.dark-mode {
+                background-color: #333; /* Dark background color */
+                color: #fff; /* Light text color */
+            }
+
+        dark-text {
+            color: azure;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const body = document.body;
+
+            themeToggle.addEventListener('click', function () {
+                // Toggle between dark mode and light mode
+                if (body.classList.contains('dark-mode')) {
+                    themeIcon.className = 'bi bi-moon'; // Moon icon for dark mode
+                    body.classList.remove('dark-mode');
+                    body.classList.remove('dark-text');
+                } else {
+                    themeIcon.className = 'bi bi-sun'; // Sun icon for light mode
+                    body.classList.add('dark-mode');
+                    body.classList.add('dark-text');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                    <img src="~/Images/logo-removebg-preview.png" alt="Company Logo" height="30" />
+                </a>
+                <h3 class="mt-2 text-light">HackaInsight</h3>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li>
+                            <!-- Inside your layout page or wherever you want the theme switcher -->
+                            <button id="theme-toggle" class="rounded-circle mt-1">
+                                <i id="theme-icon" class="bi bi-circle-half"></i> <!-- Default to sun icon for light mode -->
+
+                            </button>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

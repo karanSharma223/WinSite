@@ -1,0 +1,29 @@
+﻿@model List<WinSite.ViewModels.HomeIdeaViewModel>
+
+@{
+    ViewBag.Title = "Ideas";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1 class=" container " style="width: 60rem; color: #1E2556; margin-top:100px">All Teams </h1>
+
+@foreach (var idea in Model)
+{
+    
+
+    <div class="d-flex justify-content-center mt-5">
+        <div class="card flex-column" style="width: 60rem;">
+
+            <div class="card">
+                <h5 class="card-header text-white" style="background-color: #088BCF"><i class="bi bi-person"></i><span class="fw-medium text-light">Idea Creator : </span>  @idea.TeamLeader </h5>
+                <h6 class="card-header"><span class="fw-medium text-muted">Team Name : </span> @idea.TeamName</h6>
+                <div class="card-body">
+                    <h5 class="card-title">@idea.IdeaTitle</h5>
+                    <p class="card-text">@idea.IdeaDescription</p>
+                    <a href="/Account/Login" class="btn btn-primary" style="background-color: #31AB46;">Join team</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

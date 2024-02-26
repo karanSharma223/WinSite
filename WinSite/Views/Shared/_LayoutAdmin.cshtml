@@ -1,0 +1,162 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/umd/popper.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/fontawesome/all.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #fff; /* Light background color */
+            color: #333; /* Dark text color */
+        }
+
+            /* Dark mode styles */
+            body.dark-mode {
+                background-color: #333; /* Dark background color */
+                color: #fff; /* Light text color */
+            }
+
+        dark-text {
+            color: azure;
+        }
+
+        .container-fluid {
+            height: 100%;
+        }
+
+        .sidebar {
+            background-color: #1E2556;
+        }
+
+            .sidebar .profile-icon {
+                font-size: 5rem; /* Adjust the size of the icon */
+                margin-bottom: 0.5rem;
+                background-color: #1E2556;
+                padding-top: 50%;
+                /* Add some space between icon and text */
+            }
+
+        .navbar-custom {
+            background-color: #088BCF;
+        }
+
+        .btn-custom {
+            background-color: #31AB46;
+            color: white;
+            margin-right: 10px; /* Increase spacing here */
+        }
+
+        .navbar-toggler {
+            border-color: white;
+        }
+
+        .col-md-12 {
+            padding-top: 10%;
+            padding-left: 10%;
+        }
+    </style>
+
+</head>
+<body class="d-flex h-100">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="@Url.Action("Index","Admin")">
+                    <img src="~/Images/logo-removebg-preview.png" alt="Company Logo" height="30" />
+                </a>
+                <h3 class="mt-2 text-light">HackaInsight</h3>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end " id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-custom" href="@Url.Action("Logout","Account")">LogOut</a>
+                        </li>
+
+
+                        <li>
+                            <!-- Inside your layout page or wherever you want the theme switcher -->
+                            <button id="theme-toggle" class="rounded-circle mt-1">
+                                <i id="theme-icon" class="bi bi-circle-half"></i> <!-- Default to sun icon for light mode -->
+
+                            </button>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="col-md-2 sidebar h-100 position-fixed text-white text-center p-0">
+        <div class="profile-icon">
+            <i class="bi bi-person"></i> <!-- Bootstrap Icons - Person icon -->
+        </div>
+
+        <h4 class="text-white mb-5">@User.Identity.Name</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white mb-3" href="@Url.Action("Index","Admin")">Home</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white mb-3" href="@Url.Action("Teams","Admin")">Teams</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white mb-3" href="@Url.Action("Ideas","Admin")">Ideas</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white mb-3" href="@Url.Action("Participants","Admin")">Participants</a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white mb-3" href="@Url.Action("Hackathons","Admin")">Hackathon</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-10 offset-md-2">
+        @RenderBody() <!-- This renders the content of individual views -->
+    </div>
+
+
+    <!-- Content -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const body = document.body;
+
+            themeToggle.addEventListener('click', function () {
+                // Toggle between dark mode and light mode
+                if (body.classList.contains('dark-mode')) {
+                    themeIcon.className = 'bi bi-moon'; // Moon icon for dark mode
+                    body.classList.remove('dark-mode');
+                    body.classList.remove('dark-text');
+                } else {
+                    themeIcon.className = 'bi bi-sun'; // Sun icon for light mode
+                    body.classList.add('dark-mode');
+                    body.classList.add('dark-text');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

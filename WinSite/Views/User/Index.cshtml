@@ -1,0 +1,111 @@
+﻿@model WinSite.ViewModels.IdeaViewModel
+@{
+    var ideas = ViewBag.Ideas as List<WinSite.Models.Idea>;
+    var teamLeads = ViewBag.TeamLeads as List<string>;
+}
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        .hackathon-container{
+            max-width: 60rem;
+            background-color: #1E2556;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 3rem;
+        }
+
+        .hackathon-title {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .date-icon {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body style="overflow-x:hidden">
+    <div class="d-flex justify-content-center mb-5 mt-4">
+        <div class="hackathon-container" style="width: 80%;">
+            <div class="card-body">
+                <h5 class="card-title hackathon-title">Hackathon Name Here</h5>
+                <p class="card-text">
+                    <i class="fas fa-calendar-alt date-icon"></i> Start Date: February 20, 2024
+                </p>
+                <p class="card-text">
+                    <i class="fas fa-calendar-alt date-icon"></i> End Date: February 25, 2024
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+        <h1 class="fw-medium  dark-text">Submit Your Idea <i class="bi bi-lightbulb"></i></i></h1>
+    </div>
+    @using (Html.BeginForm("Index", "User", FormMethod.Post))
+    {<div class="container mt-2">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Add Idea</h5>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+
+                                    @Html.LabelFor(temp => temp.IdeaTitle)
+                                    @Html.TextBoxFor(temp => temp.IdeaTitle, new { placeholder = "Enter Idea Title", @class = "form-control" })
+                                    @Html.ValidationMessageFor(temp => temp.IdeaTitle)
+                                </div>
+                                <div class="mb-3">
+                                    @Html.LabelFor(temp => temp.TeamName)
+                                    @Html.TextBoxFor(temp => temp.TeamName, new { placeholder = "Enter Team Name", @class = "form-control" })
+                                    @Html.ValidationMessageFor(temp => temp.TeamName)
+                                </div>
+                                <div class="mb-3">
+                                    @Html.LabelFor(temp => temp.IdeaDescription)
+                                    @Html.TextAreaFor(temp => temp.IdeaDescription, new { placeholder = "Enter Idea Description", @class = "form-control" })
+                                    @Html.ValidationMessageFor(temp => temp.IdeaDescription)
+                                </div>
+                                <button type="submit" class="btn btn-custom">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>}
+    <div class="d-flex justify-content-center mt-5" ">
+        <h1 class="fw-medium  dark-text">Explore Ideas <i class="bi bi-search"></i></i></h1>
+    </div>
+    @for (int i = 0; i < ideas.Count; i++)
+    {
+        <div class="d-flex justify-content-center mt-3">
+            <div class="card flex-column">
+                <!-- Removed fixed width -->
+
+                <div class="card">
+                    <h5 class="card-header"><i class="bi bi-person"></i>  @teamLeads[i] </h5>
+                    <div class="card-body">
+                        <h5 class="card-title">@ideas[i].IdeaTitle</h5>
+                        <p class="card-text">@ideas[i].IdeaDescription</p>
+                        <form method="post" action="@Url.Action("JoinTeam", "User")">
+                            <input name="TeamName" type="hidden" value="@ideas[i].TeamName" />
+                            <button type="submit" class="btn btn-primary" style="background-color: #31AB46;">Join team</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</body>
+
+

@@ -1,0 +1,154 @@
+﻿@model WinSite.ViewModels.DashboardViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    main {
+        margin-left: 100%;
+    }
+
+
+    .team_count {
+        background-color: #1E2456;
+        color: white;
+    }
+
+    .participates_count {
+        background-color: #1E2456;
+        color: white;
+    }
+
+    .ideas_count {
+        background-color: #1E2456;
+        color: white;
+    }
+
+    .winner_card {
+        background-color: #229B6E;
+        color: white;
+    }
+
+    .hackathon_updates {
+        background-color: #118A9D;
+        color: white;
+    }
+
+
+    .new_hackathon_head {
+        background-color: #fff;
+    }
+
+    .hackathonTeams_table {
+        width: 100%;
+        margin-top: 20px;
+        background-color: #dee2e6;
+        border-collapse: collapse;
+    }
+
+        .hackathonTeams_table th, .hackathonTeams_table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #229b6e;
+        }
+
+        .hackathonTeams_table thead {
+            background-color: #229b6e;
+            color: white;
+        }
+
+    .winner_banner {
+        height: 100px;
+        width: 540px;
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+
+    .winner_title {
+        margin-top: 15px;
+        text-align: center;
+        text-decoration: underline;
+    }
+</style>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+
+
+
+        <!-- Main Content -->
+
+        <main id="content" class="col-md-9 ms-sm-auto col-lg-10 m-lg-5 p-4 ">
+            <div class="counts m-lg-5">
+
+
+                <div class="row">
+                    <div class="col-sm-4 mb-5 mb-sm-0 ">
+                        <div class="card">
+                            <div class="card-body team_count">
+                                <h5 class="card-title">Team Count</h5>
+                                <p class="card-text">@Model.teamCount</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body participates_count">
+                                <h5 class="card-title">Participates Count</h5>
+                                <p class="card-text">@Model.memberCount</p>
+
+                            </div>
+                        </div>
+                    </div><div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body ideas_count">
+                                <h5 class="card-title">Ideas Count</h5>
+                                <p class="card-text">@Model.ideaCount</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!---Winners Announcement-->
+            <!-- Winner Card -->
+            <div class="card text-center m-lg-5">
+                <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-success me-lg-2">First</button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-primary me-lg-2 ">Second</button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-outline-info me-lg-2">Third</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body ">
+                    <h5 class="card-title">Winner Announcement</h5>
+                    <img src="https://t3.ftcdn.net/jpg/02/75/42/46/240_F_275424616_hapvCHRAy46YJmomTiuzMHS6QgrM4QGb.jpg" alt="winner_banner" />
+                    
+                    <div>
+                        <button type="button" class="btn btn-primary btn-custom">Declare Results</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Winner Table -->
+
+        </main>
+    </div>
+</div>
+

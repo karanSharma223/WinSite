@@ -1,0 +1,51 @@
+﻿@model WinSite.ViewModels.HackathonViewModel
+
+@{
+    ViewBag.Title = "Hackathons";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="d-flex justify-content-center " style="margin-top:100px">
+    <h1 class="fw-medium  dark-text">Start a Hackathon</h1>
+</div>
+
+@using (Html.BeginForm("Index", "User", FormMethod.Post))
+{
+    <div class="container mt-2">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Add Hackathon</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                @Html.LabelFor(temp => temp.HackathonName)
+                                @Html.TextBoxFor(temp => temp.HackathonName, new { placeholder = "Enter Hackathon Name", @class = "form-control" })
+                                @Html.ValidationMessageFor(temp => temp.HackathonName)
+                            </div>
+                            <div class="mb-3">
+                                @Html.LabelFor(temp => temp.StartDate)
+                                @Html.TextBoxFor(temp => temp.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                                @Html.ValidationMessageFor(temp => temp.StartDate)
+                            </div>
+                            <div class="mb-3">
+                                @Html.LabelFor(temp => temp.EndDate)
+                                @Html.TextBoxFor(temp => temp.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                                @Html.ValidationMessageFor(temp => temp.EndDate)
+                            </div>
+                            <div class="mb-3">
+                                @Html.LabelFor(temp => temp.Teamsize)
+                                @Html.TextBoxFor(temp => temp.Teamsize, new { placeholder = "Enter Team Limit (1-10)", @class = "form-control", type = "number", min = 1, max = 10 })
+                                @Html.ValidationMessageFor(temp => temp.Teamsize)
+                            </div>
+                            <button type="submit" class="btn btn-custom">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
